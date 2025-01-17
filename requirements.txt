@@ -1,0 +1,60 @@
+# Flask and Flask Extensions
+Flask==3.0.0
+Flask-SQLAlchemy==3.1.1
+Flask-Migrate==4.0.5
+Flask-JWT-Extended==4.6.0
+Flask-Cors==4.0.0
+
+# Authentication & Authorization
+authlib==1.2.1
+python-jose==3.3.0
+passlib==1.7.4
+bcrypt==4.0.1
+python-dotenv==1.0.0
+
+# Database
+psycopg2-binary==2.9.9
+SQLAlchemy==2.0.23
+alembic==1.12.1
+
+# API Validation & Serialization
+pydantic==2.5.2
+pydantic-settings==2.1.0
+email-validator==2.1.0.post1
+
+# OAuth Dependencies
+requests==2.31.0
+oauthlib==3.2.2
+
+# Testing
+pytest==7.4.3
+pytest-cov==4.1.0
+pytest-mock==3.12.0
+factory-boy==3.3.0
+
+# Development Tools
+black==23.11.0
+flake8==6.1.0
+isort==5.12.0
+mypy==1.7.1
+
+# Production Server
+gunicorn==21.2.0
+uvicorn==0.24.0
+
+# Utilities
+python-dateutil==2.8.2
+PyJWT==2.8.0
+uuid==1.30
+
+# Logging
+structlog==23.2.0
+
+# Performance Monitoring
+prometheus-flask-exporter==0.22.4
+
+# AWS SDK (for deployment)
+boto3==1.29.3
+
+# Redis (for rate limiting and caching if needed)
+redis==5.0.1
