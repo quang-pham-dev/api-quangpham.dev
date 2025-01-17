@@ -6,8 +6,8 @@
 
 # Want to help us make this template better? Share your feedback here: https://forms.gle/ybq9Krt8jtBL3iCk7
 
-FROM python:3.11-slim
 # Base image
+FROM python:3.11-slim
 
 # Set working directory
 WORKDIR /app
@@ -23,7 +23,11 @@ ENV PYTHONPATH=/app
 RUN apt-get update && apt-get install -y \
     gcc \
     postgresql-client \
+    curl \
     && rm -rf /var/lib/apt/lists/*
+
+# Create necessary directories
+RUN mkdir -p migrations
 
 # Install Python dependencies
 COPY requirements.txt .
@@ -32,5 +36,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy project
 COPY . .
 
-# Run gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "src.app:app", "--workers", "4", "--timeout", "120"]
+# Make scripts executable
+RUN chmod +x scripts/wait_for_db.py scripts/init_db.py
+
+# Command is now specified in docker-compose.yml

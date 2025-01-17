@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, current_app
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from sqlalchemy.orm import Session
+import logging
 
 from src.core.database import get_db
 from src.services.auth import AuthService
@@ -24,11 +25,10 @@ auth_bp = Blueprint("auth", __name__)
 
 @auth_bp.route("/register", methods=["POST"])
 def register():
-    data = UserCreate(**request.get_json())
-    db: Session = get_db()
-    auth_service = AuthService(db)
-
     try:
+        data = UserCreate(**request.get_json())
+        db = get_db()
+        auth_service = AuthService(db)
         user = auth_service.register_user(email=data.email, password=data.password)
         return (
             jsonify(
@@ -38,6 +38,9 @@ def register():
         )
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
+    except Exception as e:
+        logging.error(f"[Registration error]: {str(e)}", exc_info=True)
+        raise
 
 
 @auth_bp.route("/login", methods=["POST"])
