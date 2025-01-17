@@ -6,12 +6,8 @@ from sqlalchemy.orm import Session
 db = SQLAlchemy()
 
 
-def get_db() -> Generator[Session, None, None]:
+def get_db() -> Session:
     """
     Get database session.
     """
-    try:
-        session: Session = db.session
-        yield session
-    finally:
-        session.close()
+    return db.session

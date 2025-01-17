@@ -7,7 +7,6 @@
 # You can add other services your application may depend on here, such as a
 # database or a cache. For examples, see the Awesome Compose repository:
 # https://github.com/docker/awesome-compose
-
 services:
   web:
     build: .
@@ -27,6 +26,10 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+    command: >
+      bash -c "python scripts/wait_for_db.py &&
+               python scripts/init_db.py &&
+               gunicorn --bind 0.0.0.0:5000 src.app:app --workers 4 --timeout 120"
 
   db:
     image: postgres:16.4-alpine

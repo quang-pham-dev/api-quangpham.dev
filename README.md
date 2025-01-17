@@ -14,8 +14,8 @@ QuangPham.dev is a web application that provides authentication and protected ro
 1. Clone the repository:
 
    ```
-   git clone https://github.com/quang-pham-dev/quangpham.dev.git
-   cd quangpham.dev
+   git clone https://github.com/quang-pham-dev/api-quangpham.dev.git
+   cd api-quangpham.dev
    ```
 
 2. Create a `.env` file in the root directory and add necessary environment variables:

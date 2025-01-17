@@ -1,3 +1,5 @@
+import logging
+
 class AuthenticationError(Exception):
     """Base class for authentication related errors"""
 
@@ -58,8 +60,9 @@ def register_error_handlers(app):
 
     @app.errorhandler(Exception)
     def handle_generic_error(error):
-        # Log the error here
+        # Log the full error with traceback
+        logging.error(f"Unhandled error: {str(error)}", exc_info=True)
         return {
             "error": "InternalServerError",
-            "message": "An unexpected error occurred",
+            "message": str(error),
         }, 500
